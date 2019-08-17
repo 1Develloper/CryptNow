@@ -1,5 +1,6 @@
 <?php 
-require_once 'Controllers/Api.php';
+require_once 'Model/conection.php';
+require_once 'Model/coin.php';
 
 ?>
 <!doctype html>
@@ -20,14 +21,29 @@ require_once 'Controllers/Api.php';
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-</nav>
+</nav>  
+
 
 <ul class="list-group list-group-flush">
-  <li class="list-group-item">Bitcoin 7810$ - Em alta</li>
-  <li class="list-group-item">Dapibus ac facilisis in</li>
-  <li class="list-group-item">Morbi leo risus</li>
-  <li class="list-group-item">Porta ac consectetur ac</li>
-  <li class="list-group-item">Vestibulum at eros</li>
+    <?php
+        $coin = new Coin();
+        $dados = $coin->buscarDados();
+        $query = count($dados);
+
+        if($query > 0):
+          for ($i=0; $i < $query; $i++)
+          {
+
+            echo "<tr/>";
+                    foreach ($dados[$i] as $k => $v) 
+                    {
+                        if($k != "id"):
+                            echo "<td>".$v."</td>";
+                        endif;
+                    }
+          }
+        endif;
+    ?>
 </ul>
 
     <!-- Optional JavaScript -->
